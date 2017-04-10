@@ -1,6 +1,6 @@
 ## 小程序二维码服务
 
-使用纯 golang 语言 不依赖任何第三方库
+使用纯 golang 语言 
 
 > 简单、高效、跨平台、无需运行环境
 
@@ -92,4 +92,4 @@ http.Handle("/", http.FileServer(assetFS()))
 
 ## 在线demo
 
-https://appcode.anla.io/html/
+https://appcode2.anla.io/
