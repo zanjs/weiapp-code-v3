@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>小程序入口生成 二维码 app sacn</title>
+    <link rel="icon" type="image/x-icon" href="./img/icon.png">
+    <style lang="">
+        .app {
+            text-align: center;
+        }
+        
+        div {
+            margin-bottom: 20px;
+        }
+        
+        .address {
+            width: 500px;
+            height: 60px;
+        }
+        .mt{
+            margin:0 auto;
+        }
+        .home-img{
+            height: 160px;
+            background: url(./img/load.svg) no-repeat center center;
+        }
+        .home-img img{
+            display: block;
+        }
+        .button {
+            width: 150px;
+            line-height: 30px;
+            background-color: #6bd1ff;
+            color: #FFF;
+            border: 0;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            opacity: .6;
+        }
+    </style>
+    <link rel="stylesheet" href="./dist/notyf.min.css">
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>-->
+   
+</head>
+
+<body>
+    <div class="nav">
+        
+    </div>
+    <div class="app">
+        <div>
+            <img src="./img/icon.png" alt="">
+        </div>
+        <div>
+            微信扫一扫 小程序入口生成 二维码 - 当前版本 <span class="" id="version">v2.0.0</span>
+        </div>
+        <div>
+            输入商品网址 生成 商品详细页二维码
+        </div>
+        <div>
+            <textarea type="text" class="address" id="address" placeholder="输入商品地址 如果创建失败将显示错误图片"></textarea>
+        </div>
+        <div id="combine"></div>
+        <div>
+            <img id="scan-code" onerror="this.src='./img/error.jpg'" src="./img/load.svg" alt="">
+        </div>
+        <div>
+            <button onclick="creatCode()" class="button" id="btn">
+                生成
+            </button>
+        </div>
+        <div>
+            如果您在使用过程中遇到了问题，可以点击右下角的沟通图标，与我进行交流
+        </div>
+    </div>
+    <script src="./dist/notyf.min.js"></script>
+    <script src="./js/ajax.js"></script>
+    <script>
+       
+        var request = ajax({
+            method: 'get',
+            url: '/api',
+            data: {}
+        })
+
+        request.then(function (response) {
+            
+            var versionSpan = document.getElementById("version")
+            
+            versionSpan.innerHTML = response.Version ? "v"+response.Version + " By "+ response.Name:"";
+        })
+
+        var _notyf = new Notyf();
+
+        
+     
+        function creatCode() {
+            var prourl =
+                "https://www.amazon.com/dp/B01DFKC2SO/ref=ods_gw_b_h1_ha_justask_black";
+
+            var img = document.getElementById("scan-code")
+            var textarea = document.getElementById("address")
+            var btn = document.getElementById("btn")
+
+            prourl = Trim(textarea.value)
+            var load = "./img/load.svg";
+
+            btn.innerHTML = "生成中...";
+
+            //var reg = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+            if(!checkUrl(prourl)){
+                _notyf.alert('请输入正确的商品网址');
+                btn.innerHTML = "生成";
+                return
+            }
+
+            var _indexOfCn = prourl.indexOf('.cn/');
+
+            if (_indexOfCn > 0) {
+                _notyf.alert('不支持国内产品哦');
+                btn.innerHTML = "生成";
+                return
+            }
+            // return 
+            var str = '/code?path=' + prourl + '&width=260';
+
+            img.src = load;
+
+            img.src = str;
+
+            document.getElementById("scan-code").onload = function () {
+                _notyf.confirm('ok 真棒 (●\'◡\'●)');
+                btn.innerHTML = "生成";
+            }
+
+        }
+
+        function Trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        }
+
+        function checkUrl(urlString) {
+
+            var reg = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+            if (!reg.test(urlString)) {
+                return false
+            }
+            
+            return true
+        }
+       
+    </script>
+     <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6bc54fe0.js", "daovoice")
+
+            window.onload = function(){
+                 daovoice('init', {
+                    app_id: "6bc54fe0"
+                });
+                daovoice('update');
+            }
+    </script>
+</body>
+
+</html>

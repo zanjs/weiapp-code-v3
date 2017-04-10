@@ -1,0 +1,29 @@
+{
+  "name": "app-code-v3",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gox -os=\"linux\"",
+    "build64": "gox -osarch=\"linux/amd64\"",
+    "windows64": "gox -osarch=\"windows/amd64\"",
+    "windows32": "gox -osarch=\"windows/386\"",
+    "html": "go-bindata-assetfs html/...",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julian",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "gulp": "^3.9.1",
+    "gulp-htmlmin": "^3.0.0",
+    "notyf": "^2.0.1",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-preset-es2015": "^6.22.0"
+  }
+}
