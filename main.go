@@ -32,12 +32,13 @@ func init() {
 func main() {
 
 	// http.HandleFunc("/html/", StaticServer)
-	// http.Handle("/", http.FileServer(http.Dir("./html")))
-	http.Handle("/", http.FileServer(assetFS()))
+	http.Handle("/", http.FileServer(http.Dir("./html")))
+	// http.Handle("/", http.FileServer(assetFS()))
 
 	http.HandleFunc("/code", CodeURL)
 	http.HandleFunc("/rand", PathRandom)
 	http.HandleFunc("/api", APIInfo)
+	http.HandleFunc("/qrcode", CreateUQrcode)
 
 	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
