@@ -17,7 +17,7 @@ weixin:
     secret: 
     granttype: client_credential
     # 小程序商品详细页的路径
-    path: page/scanCode/detail/detail?code=
+    path: 
     # 获取access_token 请求地址 GET
     tokenurl: https://api.weixin.qq.com/cgi-bin/token
     # 获取小程序页面二维码地址 POST
