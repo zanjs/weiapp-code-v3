@@ -29,3 +29,20 @@ func CreateUQrcode(w http.ResponseWriter, req *http.Request) {
 	// _ := qrcode.WriteFile(sURL, qrcode.Medium, 256, "qr.png")
 
 }
+
+// Qcode is ..
+func Qcode(w http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+
+	_content := req.FormValue("content")
+
+	if _content == "" {
+		_content = Config.QrCode.DefaultContent
+	}
+
+	var png []byte
+
+	png, _ = qrcode.Encode(_content, qrcode.Medium, 256)
+
+	io.WriteString(w, string(png))
+}

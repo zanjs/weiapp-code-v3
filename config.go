@@ -16,6 +16,9 @@ var Config = struct {
 		TokenURL  string `default:"https://api.weixin.qq.com/cgi-bin/token"`
 		CreateURL string `default:"https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token="`
 	}
+	QrCode struct {
+		DefaultContent string `default:"https://m.6city.com"`
+	}
 	BaiDu struct {
 		CreateURL string `default:"http://dwz.cn/create.php"`
 	}

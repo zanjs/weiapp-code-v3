@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -16,6 +17,9 @@ func GetToken() string {
 	q.Set("appid", Config.WeiXin.Appid)
 	q.Set("secret", Config.WeiXin.Secret)
 	u.RawQuery = q.Encode()
+
+	fmt.Println(u.String())
+
 	resp, err := http.Get(u.String())
 
 	if err != nil {

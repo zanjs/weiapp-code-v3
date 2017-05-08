@@ -39,6 +39,7 @@ func main() {
 	http.HandleFunc("/rand", PathRandom)
 	http.HandleFunc("/api", APIInfo)
 	http.HandleFunc("/qrcode", CreateUQrcode)
+	http.HandleFunc("/qr", Qcode)
 
 	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
