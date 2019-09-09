@@ -1,5 +1,7 @@
 ## 小程序二维码服务
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zanjs/weiapp-code-v3.svg)](https://greenkeeper.io/)
+
 使用 golang 
 
 > 简单、高效、跨平台、无需运行环境
